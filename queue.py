@@ -9,47 +9,50 @@ class Node:
 class Queue:
 
     def __init__(self):
-        self.top = None
-        self.bottom = None
+        self.first = None
+        self.last = None
         self.length = 0
         
     def __iter__(self):
-        node = self.bottom
+        node = self.last
         while node is not None:
             yield node
             node = node.next
 
-    def printStack(self):
-        node = self.bottom
+    def printQueue(self):
+        node = self.first
         nodes = []
         while node is not None:
             nodes.append(node.data)
             node = node.next
+        print(nodes)
         return nodes
 
     def peek(self):
-        return self.bottom.data
+        if self.length == 0:
+            return None
+        return self.first.data
 
     def enqueue(self, value):
         node = Node(value)
-        if self.bottom is None:
-            self.bottom = node
-            self.length += 1
-            return
-        for current_node in self:
-            pass
-        current_node.next = node
+        if self.length == 0:
+            self.first = node
+            self.last = node
+        else:
+            self.last.next = node
+            self.last = node
         self.length += 1
+        return self
 
     def dequeue(self):
-        if self.bottom is None:
-            return "List is empty"
+        if self.first is None:
+            return None
 
-        if self.bottom.next is None:
-            self.bottom = None
+        if self.first is self.last:
+            self.last = None
 
-        deleted_data = self.bottom.data
-        self.bottom = self.bottom.next
+        deleted_data = self.first.data
+        self.first = self.first.next
         self.length -= 1
 
         return deleted_data
@@ -60,18 +63,21 @@ my_queue.enqueue(Node("150"))
 my_queue.enqueue(Node("300"))
 my_queue.enqueue(Node("20"))
 print(my_queue.length)
-print(my_queue.printStack())
+my_queue.printQueue()
 print(my_queue.peek())
 print(my_queue.dequeue())
 print(my_queue.length)
-print(my_queue.printStack())
+my_queue.printQueue()
 print(my_queue.peek())
 print(my_queue.dequeue())
 print(my_queue.length)
-print(my_queue.printStack())
+my_queue.printQueue()
 print(my_queue.peek())
 print(my_queue.dequeue())
 print(my_queue.length)
-print(my_queue.printStack())
+my_queue.printQueue()
 print(my_queue.peek())
 print(my_queue.dequeue())
+print(my_queue.length)
+my_queue.printQueue()
+print(my_queue.peek())
