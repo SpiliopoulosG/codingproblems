@@ -3,33 +3,33 @@ import unittest
 import types
 from main import palindrome
 
-class TestSum(unittest.TestCase):
+class TestPalindrome(unittest.TestCase):
 
-    def test_reverse_exist(self):
+    def test_palindrome_exist(self):
         self.assertIsInstance(palindrome, types.FunctionType)
 
-    def test_reverse_aba(self):
+    def test_palindrome_aba(self):
         self.assertTrue(palindrome("aba"))
 
-    def test_reverse_aba1(self):
+    def test_palindrome_aba1(self):
         self.assertFalse(palindrome(" aba"))
 
-    def test_reverse_aba2(self):
+    def test_palindrome_aba2(self):
         self.assertFalse(palindrome("aba "))
 
-    def test_reverse_greetings(self):
+    def test_palindrome_greetings(self):
         self.assertFalse(palindrome("greetings"))
 
-    def test_reverse_1000000001(self):
+    def test_palindrome_1000000001(self):
         self.assertTrue(palindrome("1000000001"))
 
-    def test_reverse_Fish1hsif(self):
+    def test_palindrome_Fish1hsif(self):
         self.assertFalse(palindrome("'Fish hsif'"))
 
-    def test_reverse_pennep(self):
+    def test_palindrome_pennep(self):
         self.assertTrue(palindrome("pennep"))
 
-    def test_reverse_abcdefg(self):
+    def test_palindrome_abcdefg(self):
         self.assertFalse(palindrome("abcdefg"))
 
 

@@ -3,7 +3,7 @@ import types
 from main import reverseInt
 
 
-class TestSum(unittest.TestCase):
+class TestReverseInt(unittest.TestCase):
 
     def test_reverse_exist(self):
         self.assertIsInstance(reverseInt, types.FunctionType)
