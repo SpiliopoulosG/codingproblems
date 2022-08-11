@@ -56,11 +56,10 @@ class LinkedList:
         if self.size() != 0:
             node = self.head
             previous = self.head
-            while node is not None:
-                if node.next is None:
-                    previous.next = None
+            while node.next is not None:
                 previous = node
                 node = node.next
+            previous.next = None
         else:
             return None
 
