@@ -1,3 +1,4 @@
+from os import link
 import unittest
 import types
 from main import LinkedList, Node
@@ -19,119 +20,97 @@ class TestLinkedList(unittest.TestCase):
 
     def test_insert_first(self):
         linkedlist = LinkedList()
-        linkedlist.insertFirst(1)
+        linkedlist.insert_first(1)
         self.assertEqual(linkedlist.head.data, 1)
-        linkedlist.insertFirst(2)
+        linkedlist.insert_first(2)
         self.assertEqual(linkedlist.head.data, 2)
 
     def test_size(self):
         linkedlist = LinkedList()
         self.assertEqual(linkedlist.size(), 0)
-        linkedlist.insertFirst(1)
-        linkedlist.insertFirst(1)
-        linkedlist.insertFirst(1)
-        linkedlist.insertFirst(1)
+        linkedlist.insert_first(1)
+        linkedlist.insert_first(1)
+        linkedlist.insert_first(1)
+        linkedlist.insert_first(1)
         self.assertEqual(linkedlist.size(), 4)
+
+    def test_get_first(self):
+        linkedlist = LinkedList()
+        linkedlist.insert_first(1)
+        self.assertEqual(linkedlist.get_first().data, 1)
+        linkedlist.insert_first(2)
+        self.assertEqual(linkedlist.get_first().data, 2)
+
+    def test_get_last(self):
+        linkedlist = LinkedList()
+        linkedlist.insert_first(2)
+        self.assertEqual(linkedlist.get_last().data, 2)
+        linkedlist.insert_first(1)
+        self.assertEqual(linkedlist.get_last().data, 2)
+
+    def test_clear(self):
+        linkedlist = LinkedList()
+        linkedlist.insert_first(1)
+        linkedlist.insert_first(1)
+        linkedlist.insert_first(1)
+        linkedlist.insert_first(1)
+        self.assertEqual(linkedlist.size(), 4)
+        linkedlist.clear()
+        self.assertEqual(linkedlist.size(), 0)
+
+    def test_remove_first(self):
+        linkedlist = LinkedList()
+        linkedlist.insert_first('a')
+        linkedlist.remove_first()
+        self.assertEqual(linkedlist.size(), 0)
+        self.assertEqual(linkedlist.get_first(), None)
+
+    def test_remove_first_with_3_nodes(self):
+        linkedlist = LinkedList()
+        linkedlist.insert_first('c')
+        linkedlist.insert_first('b')
+        linkedlist.insert_first('a')
+        linkedlist.remove_first()
+        self.assertEqual(linkedlist.size(), 2)
+        self.assertEqual(linkedlist.get_first().data, 'b')
+        linkedlist.remove_first()
+        self.assertEqual(linkedlist.size(), 1)
+        self.assertEqual(linkedlist.get_first().data, 'c')
+
+    def test_remove_last_empty(self):
+        linkedlist = LinkedList()
+        self.assertEqual(linkedlist.remove_last(), None)
+
+    def test_remove_last_with_1_node(self):
+        linkedlist = LinkedList()
+        linkedlist.insert_first('a')
+        linkedlist.remove_last()
+        self.assertEqual(linkedlist.size(), 0)
+        self.assertEqual(linkedlist.head, None)
+
+    def test_remove_last_with_2_node(self):
+        linkedlist = LinkedList()
+        linkedlist.insert_first('b')
+        linkedlist.insert_first('a')
+        linkedlist.remove_last()
+        self.assertEqual(linkedlist.size(), 1)
+        self.assertEqual(linkedlist.head.data, 'a')
+
+    def test_remove_last_with_3_node(self):
+            linkedlist = LinkedList()
+            linkedlist.insert_first('c')
+            linkedlist.insert_first('b')
+            linkedlist.insert_first('a')
+            linkedlist.remove_last()
+            self.assertEqual(linkedlist.size(), 2)
+            self.assertEqual(linkedlist.get_last().data, 'b')
+
 
 
 
 if __name__ == '__main__':
     unittest.main()
 
-# describe('GetFirst', () => {
-#   test('returns the first element', () => {
-#     const l = new List();
-#     l.insertFirst(1);
-#     expect(l.getFirst().data).toEqual(1);
-#     l.insertFirst(2);
-#     expect(l.getFirst().data).toEqual(2);
-#   });
-# });
-
-# describe('GetLast', () => {
-#   test('returns the last element', () => {
-#     const l = new List();
-#     l.insertFirst(2);
-#     expect(l.getLast()).toEqual({ data: 2, next: null });
-#     l.insertFirst(1);
-#     expect(l.getLast()).toEqual({ data: 2, next: null });
-#   });
-# });
-
-# describe('Clear', () => {
-#   test('empties out the list', () => {
-#     const l = new List();
-#     expect(l.size()).toEqual(0);
-#     l.insertFirst(1);
-#     l.insertFirst(1);
-#     l.insertFirst(1);
-#     l.insertFirst(1);
-#     expect(l.size()).toEqual(4);
-#     l.clear();
-#     expect(l.size()).toEqual(0);
-#   });
-# });
-
-# describe('RemoveFirst', () => {
-#   test('removes the first node when the list has a size of one', () => {
-#     const l = new List();
-#     l.insertFirst('a');
-#     l.removeFirst();
-#     expect(l.size()).toEqual(0);
-#     expect(l.getFirst()).toEqual(null);
-#   });
-
-#   test('removes the first node when the list has a size of three', () => {
-#     const l = new List();
-#     l.insertFirst('c');
-#     l.insertFirst('b');
-#     l.insertFirst('a');
-#     l.removeFirst();
-#     expect(l.size()).toEqual(2);
-#     expect(l.getFirst().data).toEqual('b');
-#     l.removeFirst();
-#     expect(l.size()).toEqual(1);
-#     expect(l.getFirst().data).toEqual('c');
-#   });
-# });
-
-# describe('RemoveLast', () => {
-#   test('RemoveLast removes the last node when list is empty', () => {
-#     const l = new List();
-#     expect(() => {
-#       l.removeLast();
-#     }).not.toThrow();
-#   });
-
-#   test('RemoveLast removes the last node when list is length 1', () => {
-#     const l = new List();
-#     l.insertFirst('a');
-#     l.removeLast();
-#     expect(l.head).toEqual(null);
-#   });
-
-#   test('RemoveLast removes the last node when list is length 2', () => {
-#     const l = new List();
-#     l.insertFirst('b');
-#     l.insertFirst('a');
-
-#     l.removeLast();
-
-#     expect(l.size()).toEqual(1);
-#     expect(l.head.data).toEqual('a');
-#   });
-
-#   test('RemoveLast removes the last node when list is length 3', () => {
-#     const l = new List();
-#     l.insertFirst('c');
-#     l.insertFirst('b');
-#     l.insertFirst('a');
-#     l.removeLast();
-
-#     expect(l.size()).toEqual(2);
-#     expect(l.getLast().data).toEqual('b');
-#   });
-# });
 
 # describe('InsertLast', () => {
 #   test('adds to the end of the list', () => {
