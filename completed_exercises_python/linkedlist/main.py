@@ -3,12 +3,14 @@
 #  See 'directions' document
 
 class Node:
+    """Makes a node to be appended in a linked list"""
 
     def __init__(self, value, next_node=None):
         self.data = value
         self.next = next_node
 
 class LinkedList:
+    """A class for Linked Lists"""
 
     def __init__(self):
         self.head = None
@@ -51,6 +53,7 @@ class LinkedList:
             return None
 
     def remove_last(self):
+        """Removes the last element from the linked list"""
         if self.size() == 1:
             self.head = None
         if self.size() != 0:
@@ -80,12 +83,14 @@ class LinkedList:
         pass
 
     def iter(self):
+        """Iters over the entire linked list"""
         node = self.head
         while node is not None:
             yield node
             node = node.next
             
     def __repr__(self):
+        """Prints the entire linked list in a --> way"""
         node = self.head
         nodes = []
         while node is not None:
