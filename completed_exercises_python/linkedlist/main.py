@@ -2,6 +2,9 @@
 #  Implement classes Node and Linked Lists
 #  See 'directions' document
 
+from readline import insert_text
+
+
 class Node:
     """Makes a node to be appended in a linked list"""
 
@@ -71,18 +74,42 @@ class LinkedList:
         self.head = Node(value, self.head)
         
     def insert_last(self, value):
-        pass
+        """Insert value at the end of the list"""
+        if self.head is None:
+            self.insert_first(value)
+            return
+        new_node = Node(value)
+        node = self.head
+        while node.next is not None:
+            node = node.next
+        node.next = new_node
+        
 
-    def getAt(self, index):
-        pass
+    def get_at(self, index):
+        if self.size() < index or self.size() == 0:
+            return None
+        node = self.head
+        counter = 0
+        while node is not None:
+            if counter == index:
+                return node
+            node = node.next
+            counter += 1
 
     def remove_at(self, index):
-        pass
+        if self.size() < index or self.size() == 0:
+            return None
+        if self.size() == 1:
+            return self.remove_first()
+        previous_node = self.get_at(index - 1)
+        node = self.get_at(index)
+        previous_node.next = node.next
+
 
     def insert_at(self, index, value):
         pass
 
-    def iter(self):
+    def __iter__(self):
         """Iters over the entire linked list"""
         node = self.head
         while node is not None:
@@ -104,5 +131,5 @@ l.insert_first(10)
 l.insert_first(20)
 l.insert_first(80)
 l.insert_first(40)
-l.remove_last()
-print(l.get_first().data)
+print(l)
+print(l.get_at(10))

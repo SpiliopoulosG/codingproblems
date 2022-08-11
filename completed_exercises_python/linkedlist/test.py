@@ -105,60 +105,51 @@ class TestLinkedList(unittest.TestCase):
             self.assertEqual(linkedlist.size(), 2)
             self.assertEqual(linkedlist.get_last().data, 'b')
 
+    def test_insert_last(self):
+        linkedlist = LinkedList()
+        linkedlist.insert_first('a')
+        linkedlist.insert_last('b')
+        self.assertEqual(linkedlist.size(), 2)
+        self.assertEqual(linkedlist.get_last().data, 'b')
+
+    def test_get_at(self):
+        linkedlist = LinkedList()
+        self.assertEqual(linkedlist.get_at(10), None)
+        linkedlist.insert_last(1)
+        linkedlist.insert_last(2)
+        linkedlist.insert_last(3)
+        linkedlist.insert_last(4)
+        self.assertEqual(linkedlist.get_at(0).data, 1)
+        self.assertEqual(linkedlist.get_at(1).data, 2)
+        self.assertEqual(linkedlist.get_at(2).data, 3)
+        self.assertEqual(linkedlist.get_at(3).data, 4)
+
+    def test_remove_at(self):
+        linkedlist = LinkedList()
+        linkedlist.remove_at(1)
+        linkedlist.remove_at(2)
+        linkedlist.remove_at(3)
+        self.assertEqual(linkedlist.remove_at(0), None)
+        self.assertEqual(linkedlist.remove_at(1), None)
+        self.assertEqual(linkedlist.remove_at(2), None)
+
+    def test_remove_at_out_of_index(self):
+        linkedlist = LinkedList()
+        linkedlist.remove_at(10)
+        self.assertEqual(linkedlist.remove_at(10), None)
+
+    def test_remove_at_out_of_index(self):
+        linkedlist = LinkedList()
+        linkedlist.remove_at(10)
+        self.assertEqual(linkedlist.remove_at(10), None)
+
+
+
 
 
 
 if __name__ == '__main__':
     unittest.main()
-
-
-# describe('InsertLast', () => {
-#   test('adds to the end of the list', () => {
-#     const l = new List();
-#     l.insertFirst('a');
-
-#     l.insertLast('b');
-
-#     expect(l.size()).toEqual(2);
-#     expect(l.getLast().data).toEqual('b');
-#   });
-# });
-
-# describe('GetAt', () => {
-#   test('returns the node at given index', () => {
-#     const l = new List();
-#     expect(l.getAt(10)).toEqual(null);
-
-#     l.insertLast(1);
-#     l.insertLast(2);
-#     l.insertLast(3);
-#     l.insertLast(4);
-
-#     expect(l.getAt(0).data).toEqual(1);
-#     expect(l.getAt(1).data).toEqual(2);
-#     expect(l.getAt(2).data).toEqual(3);
-#     expect(l.getAt(3).data).toEqual(4);
-#   });
-# });
-
-# describe('RemoveAt', () => {
-#   test('removeAt doesnt crash on an empty list', () => {
-#     const l = new List();
-#     expect(() => {
-#       l.removeAt(0);
-#       l.removeAt(1);
-#       l.removeAt(2);
-#     }).not.toThrow();
-#   });
-
-#   test('removeAt doesnt crash on an index out of bounds', () => {
-#     const l = new List();
-#     expect(() => {
-#       const l = new List();
-#       l.insertFirst('a');
-#       l.removeAt(1);
-#     }).not.toThrow();
-#   });
 
 #   test('removeAt deletes the first node', () => {
 #     const l = new List();
