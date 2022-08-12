@@ -1,6 +1,4 @@
-#  --- Directions
-#  Implement classes Node and Linked Lists
-#  See Comments
+"""LinkedList and Node Module"""
 
 class Node:
     """Makes a node to be appended in a linked list"""
