@@ -6,7 +6,7 @@
 #  the size of the list, and only iterate
 #  through the list one time.
 #  --- Example
-#  const l = new LinkedList();
+#  const l = new LinkedList()
 #  l.insertLast('a')
 #  l.insertLast('b')
 #  l.insertLast('c')

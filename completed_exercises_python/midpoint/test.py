@@ -5,7 +5,7 @@ from linkedlist import LinkedList, Node
 from main import midpoint
 
 
-class TestLinkedList(unittest.TestCase):
+class TestMidPoint(unittest.TestCase):
     """Test Midpoint Function"""
 
     def test_midpoint_exist(self):
